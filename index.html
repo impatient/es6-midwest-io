@@ -15,7 +15,9 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
 		<link rel="stylesheet" href="css/reveal.min.css">
-		<link rel="stylesheet" href="css/theme/default.css" id="theme">
+		<link rel="stylesheet" href="css/theme/midwest.css" id="theme">
+
+        <link href='http://fonts.googleapis.com/css?family=Cabin+Sketch:400,700' rel='stylesheet' type='text/css'>
 
 		<!-- For syntax highlighting -->
 		<link rel="stylesheet" href="lib/css/zenburn.css">
@@ -30,6 +32,8 @@
 				document.getElementsByTagName( 'head' )[0].appendChild( link );
 			}
 		</script>
+
+
 
 		<!--[if lt IE 9]>
 		<script src="lib/js/html5shiv.js"></script>
@@ -293,7 +297,9 @@
                 </section>
 
                 <section>
-                    <h2>Arrow Function</h2>
+                    <section>
+                        <h2>Arrow Function</h2>
+                    </section>
                     <section data-markdown="markdown/transpile/arrowSample.md" data-separator="^\n\n\n" data-vertical="^\n\n" data-notes="^Note:">
 
                     </section>
@@ -319,7 +325,9 @@
                 </section>
 
                 <section>
-                    <h2>Shorthand Object</h2>
+                    <section>
+                        <h2>Shorthand Object</h2>
+                    </section>
                     <section data-markdown="markdown/transpile/shorthandSample.md" data-separator="^\n\n\n" data-vertical="^\n\n" data-notes="^Note:">
 
                     </section>
@@ -352,37 +360,7 @@
 					</section>
 
                 <section>
-                    <section data-markdown>
-
-                        <script type="text/template">
-                        The One With the Kitchen Sink
-                        ```
-                        //arrow + destructuring + default params
-                        var fibNext=({last=0,current})=>{ return last + current};
-                        var gen = function *(...two ) { //generator + rest params
-                          var [last,current] = two;  //destructuring
-                          var next = fibNext({last,current}); //shorthand object syntax
-                          while(next < 1000) {
-                            next = fibNext({last,current});
-                            [last, current] = [current,next]; //destructuring
-                            yield next; //yield keyword (for generators)
-                          }
-                        }
-                        for(let z of gen(0,1)) { //generator + let
-                          var q = [ for (n of gen(...[0,1])) if (n=== z) n ]  //iterators + array comprehension + spread operator
-                          console.log(\`Runtime complexity ${q}\`); //string templating
-                        }
-
-                        export gen //modules
-                        ```
-                        </script>
-                        <aside class="notes">
-                            <ol>
-                                <li>Hey you.  Go line by line.</li>
-                                <li>Make sure to go into how yield pauses execution until the next time data is needed.</li>
-                            </ol>
-
-                        </aside>
+                        <section data-markdown="markdown/multi-one/kitchen-sink.md" data-separator="^\n\n\n" data-vertical="^\n\n" data-notes="^Note:">
 
                         </section>
 
@@ -572,14 +550,14 @@
 				progress: true,
 				history: true,
 				center: true,
-                width:1600,
-                height: 1050,
+                width: '80%',
+                height: '80%',
 				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
 				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
 
 				// Parallax scrolling
-				// parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
-				// parallaxBackgroundSize: '2100px 900px',
+				 parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+				 parallaxBackgroundSize: '2100px 900px',
 
 				// Optional libraries used to extend on reveal.js
 				dependencies: [

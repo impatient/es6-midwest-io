@@ -1,5 +1,4 @@
-Generator
----
+### Generator
 ```
 
 var generator = function*(initial) {

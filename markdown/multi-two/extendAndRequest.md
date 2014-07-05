@@ -1,4 +1,4 @@
-Continued
+### Continued
 ```
 class JSONResolver extends HttpResolver { //extends
   getData() {
