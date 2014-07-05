@@ -1,0 +1,598 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>reveal.js - The HTML Presentation Framework</title>
+
+		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+		<meta name="author" content="Hakim El Hattab">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.min.css">
+		<link rel="stylesheet" href="css/theme/default.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+		<script>
+			if( window.location.search.match( /print-pdf/gi ) ) {
+				var link = document.createElement( 'link' );
+				link.rel = 'stylesheet';
+				link.type = 'text/css';
+				link.href = 'css/print/pdf.css';
+				document.getElementsByTagName( 'head' )[0].appendChild( link );
+			}
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h2>ECMAScript 6 in enough depth to get you curious, but not really get anything productive done with it.<span class="fragment">(Working title)</span> </h2>
+					<p>
+						Scott Dillender (@smimp)
+					</p>
+                    <aside class="notes">
+                      <ol>
+                         <li>Interest in this after listening to some Javascript Jabber episodes on it</li>
+                         <li>Mention your version grunt traceur</li>
+                      </ol>
+
+
+                    </aside>
+				</section>
+
+				<section>
+					<h2>Overview</h2>
+					<ul>
+                        <li>Should you use it today?</li>
+                        <li>How it works today</li>
+                        <li>What ES6 gives us</li>
+                        <li>Types of features</li>
+                        <li>How the existing tools work</li>
+                        <li>Quick run through of the new features</li>
+                        <li>Clarity on spec status</li>
+                        <li>Questions?</li>
+					</ul>
+
+                    <aside class="notes">
+                        <ol>
+                            <li>Yes; Is it the wild west.  Not really.</li>
+                            <li>Goal of the talk:  Already loads of information out there.  I aim to distill it and provide access to the better content.</li>
+                            <li>No object.observe. </li>
+                            <li>Proxies implemented differently.  Older version of the spec</li>
+                            <li>Syntactic sugar vs actual new features.  </li>
+                            <li>Comparison to Coffee script</li>
+
+                        </ol>
+                    </aside>
+				</section>
+                <section>
+                    <h2>What is ES6/Should you use it today</h2>
+                    <p>
+                        ES6 is the result of years long work by the TC39 standards body (Comprised of representatives from various tech companies)
+                    </p>
+                </section>
+                <!--section>
+                    <h2>How it works today</h2>
+                    <ul class="fragment">
+                       <li>Transpilers</li>
+                       <li>node --harmony</li>
+                       <li>Behind browser flags</li>
+                    </ul>
+                </section-->
+                <section>
+                    <h2>Evergreen Browsers</h2>
+                    <p>
+                        We're finally to a point where all of the major browsers will be on a relatively frequent release cycle.
+                    </p>
+                    <ul>
+                        <li>Firefox - 7 releases in the past year</li>
+                        <li>Chrome - 8 releases in the past year</li>
+                        <li>IE - last two major releases were in October of 2012 and 2013.</li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>We have the technology</h2>
+                    <p>
+                        With features added in ES5, most of the features in ES6 can be implemented with a polyfill or with some clever code rewriting.
+                    </p>
+                    <div>Tools that support this:</div>
+                    <ul>
+                        <li>Traceur - Google</li>
+                        <li>Regenerator/Recast - Facebook</li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>Current Browser Share</h2>
+                    <div><img src="images/browserMarketShareMay2014.png"></div>
+                </section>
+                <section>
+                    <h2>ES5 Compatibility Chart</h2>
+                    <div><img src="images/ie8-es5.png" alt=""/></div>
+                </section>
+                <section>
+                    <h2>Summary of New Features</h2>
+                    <ul>
+                        <li>Arrow Functions</li>
+                        <li>Classes</li>
+                        <li>Generators/Iterators</li>
+                        <li>Comprehensions/Spread/Destructure</li>
+                        <li>Map/WeakMap/Set/WeakSet</li>
+                        <li>Proxies</li>
+                        <li>Reflection</li>
+                        <li>Numerous Utility Methods</li>
+                        <li>Imports</li>
+                    </ul>
+
+                </section>
+                <section>
+                    <section>
+                        <h2>Type of Features</h2>
+
+                        <ul>
+                            <li>Syntactic Sugar
+                                <p>If you're creative/masochistic, you may already have some of these.  Of course, it's probably very verbose.</p>
+                            </li>
+
+                            <li>Features that are completely new and can't be replicated.</li>
+                        </ul>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            Rest Parameters - Syntactic Sugar
+                            ```
+                            function rest(a, ...b) { console.log(a,b); };
+                            rest(1,2,3,4);
+                            //1,[2,3,4]
+
+                            ```
+                            </script>
+                        </section>
+
+                    <section data-markdown>
+                        <script type="text/template" class="fragment">
+                            ```
+                            function unrest(a,b) { console.log(a,b); }
+
+                            function restEnd(primaryFunction) {
+                              return function() {
+                                var argSize = arguments.length;
+
+                                return primaryFunction.call(this,
+                                    arguments[0],
+                                    [].slice.call(arguments,1)
+                                );
+                              }
+                            }
+
+                            restEnd(unrest)(1,2,3,4);
+                            //1,[2,3,4]
+
+
+                            ```
+                        </script>
+
+                        <aside class="notes">
+                            <p>Originally had the 'spread' in the middle, which can be done with JS, but isn't part of ES spec. It also really killed a sample for handlebar-helpers. </p>
+
+                        </aside>
+                    </section>
+                    <section data-markdown>
+
+                        <script type="text/template">
+                        Proxy - New Functionality
+
+                        ```
+                        var a = Proxy({}, {
+                            get: function() { console.log("get arguments", arguments); },
+                            set: function(obj, prop, newVal) {
+                                console.log("Calling set with ", arguments); obj[prop] = newVal;    }
+                            });
+                        a.eek = 'bam';
+
+                        Returns: "Calling set with " Arguments
+                           {0: Object, 1: "eek", 2: "bam", 3: Object, 2 more…}
+
+                        ```
+                        </script>
+
+                        <aside class="notes">
+                            <ul>
+                                <li>How about how this works.  Proxy can intercept all sorts of calls.</li>
+                                <li>As late May Firefox had the most complete implementation</li>
+                                <li>Traceur could do it, but would incur performance penalties.</li>
+                                <li>Need to use the reflection API to get this.  Brendan Eich was corrected on the mailing list.  </li>
+                            </ul>
+                        </aside>
+
+
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            Generators - Borderline
+                            ```
+                            var numberator = function*(base) {
+                              while(base < 4) {
+                                yield ++base;
+                              }
+                              return ++base;
+                            };
+
+                            //Array comprehension
+                            console.log([for ( x1 of numberator(0)) x1]);
+                            //[1,2,3,4]
+                        ```
+                        </script>
+
+                        <aside class="notes">
+                            <ol>
+                                <li>In the background, this generates a switch statement with all of the paths.</li>
+                                <li>I think of it as unwinding cylcomatic complexity.</li>
+                            </ol>
+                        </aside>
+
+                    </section>
+
+                    <section data-markdown>
+                        ```
+                        var numberator = $traceurRuntime.initGeneratorFunction(function $__22(base) {
+                        return $traceurRuntime.createGeneratorInstance(function($ctx) {
+                          while (true)
+                            switch ($ctx.state) {
+                                case 0:
+                                    $ctx.state = (base < 4) ? 1 : 5;
+                                    break;
+                                case 1:
+                                    $ctx.state = 2;
+                                    return ++base;
+                                case 2:
+                                    $ctx.maybeThrow();
+                                    $ctx.state = 0;
+                                    break;
+                                case 5:
+                                    $ctx.returnValue = ++base;
+                                    $ctx.state = -2;
+                                    break;
+                                default:
+                                    return $ctx.end();
+                                    }
+                                    }, $__22, this);
+                                    });
+                        ```
+                    </section>
+
+
+
+
+                </section>
+
+                <section>
+                    <h2>Transpilers in Action</h2>
+                    <ul>
+                        <li>Arrow Function</li>
+                        <li>Shorthand Object</li>
+                    </ul>
+
+
+                </section>
+
+                <section>
+                    <h2>Arrow Function</h2>
+                    <section data-markdown="markdown/transpile/arrowSample.md" data-separator="^\n\n\n" data-vertical="^\n\n" data-notes="^Note:">
+
+                    </section>
+
+                    <section data-markdown="markdown/transpile/arrowEquivalent.md" data-separator="^\n\n\n" data-vertical="^\n\n" data-notes="^Note:">
+
+                    </section>
+
+
+                    <section data-markdown="markdown/transpile/astArrow.md" data-separator="^\n\n\n" data-vertical="^\n\n" data-notes="^Note:">
+
+                    </section>
+
+
+                    <section data-markdown="markdown/transpile/astArrowEquivalent.md" data-separator="^\n\n\n" data-vertical="^\n\n" data-notes="^Note:">
+
+                    </section>
+
+                    <section data-markdown="markdown/transpile/astArrowTransform.md" data-separator="^\n\n\n" data-vertical="^\n\n" data-notes="^Note:">
+
+                    </section>
+
+                </section>
+
+                <section>
+                    <h2>Shorthand Object</h2>
+                    <section data-markdown="markdown/transpile/shorthandSample.md" data-separator="^\n\n\n" data-vertical="^\n\n" data-notes="^Note:">
+
+                    </section>
+
+                    <section data-markdown="markdown/transpile/astShorthand.md" data-separator="^\n\n\n" data-vertical="^\n\n" data-notes="^Note:">
+
+                    </section>
+
+                    <section data-markdown="markdown/transpile/astShorthandEquivalent.md" data-separator="^\n\n\n" data-vertical="^\n\n" data-notes="^Note:">
+
+                    </section>
+
+                    <section data-markdown="markdown/transpile/astShorthandTransform.md" data-separator="^\n\n\n" data-vertical="^\n\n" data-notes="^Note:">
+
+                    </section>
+
+                </section>
+
+
+
+
+					<section>
+                        <!-- TODO Do this with css -->
+						<h2><strike>ES6 in 3 Easy Slides</strike></h2>
+                        <h2 class="fragment"><strike>Frankenfunctions</strike></h2>
+                        <h2 class="fragment">The One With the Friends Reference?</h2>
+
+
+
+					</section>
+
+                <section>
+                    <section data-markdown>
+
+                        <script type="text/template">
+                        The One With the Kitchen Sink
+                        ```
+                        //arrow + destructuring + default params
+                        var fibNext=({last=0,current})=>{ return last + current};
+                        var gen = function *(...two ) { //generator + rest params
+                          var [last,current] = two;  //destructuring
+                          var next = fibNext({last,current}); //shorthand object syntax
+                          while(next < 1000) {
+                            next = fibNext({last,current});
+                            [last, current] = [current,next]; //destructuring
+                            yield next; //yield keyword (for generators)
+                          }
+                        }
+                        for(let z of gen(0,1)) { //generator + let
+                          var q = [ for (n of gen(...[0,1])) if (n=== z) n ]  //iterators + array comprehension + spread operator
+                          console.log(\`Runtime complexity ${q}\`); //string templating
+                        }
+
+                        export gen //modules
+                        ```
+                        </script>
+                        <aside class="notes">
+                            <ol>
+                                <li>Hey you.  Go line by line.</li>
+                                <li>Make sure to go into how yield pauses execution until the next time data is needed.</li>
+                            </ol>
+
+                        </aside>
+
+                        </section>
+
+                        <section data-markdown="markdown/features/defaultParams.md" data-separator="^\n\n\n" data-vertical="^\n\n" data-notes="^Note:">
+
+                        </section>
+
+                        <section data-markdown="markdown/features/destructuring.md" data-separator="^\n\n\n" data-vertical="^\n\n" data-notes="^Note:">
+
+                        </section>
+
+                        <section data-markdown="markdown/features/destructuring-arrays.md" data-separator="^\n\n\n" data-vertical="^\n\n" data-notes="^Note:">
+
+                        </section>
+
+                        <section data-markdown="markdown/features/generator.md" data-separator="^\n\n\n" data-vertical="^\n\n" data-notes="^Note:">
+
+                        </section>
+
+                        <section data-markdown="markdown/features/let-const.md" data-separator="^\n\n\n" data-vertical="^\n\n" data-notes="^Note:">
+
+                        </section>
+
+                        <section data-markdown="markdown/features/comprehension.md" data-separator="^\n\n\n" data-vertical="^\n\n" data-notes="^Note:">
+
+                        </section>
+
+                        <section data-markdown="markdown/features/spread.md" data-separator="^\n\n\n" data-vertical="^\n\n" data-notes="^Note:">
+
+                        </section>
+
+                        <section data-markdown="markdown/features/string-templates.md" data-separator="^\n\n\n" data-vertical="^\n\n" data-notes="^Note:">
+
+                        </section>
+
+
+                    </section>
+
+                    <section>
+
+                        <section data-markdown="markdown/multi-two/classAndPromise.md" >
+
+                        </section>
+
+                        <section data-markdown="markdown/multi-two/extendAndRequest.md" >
+
+                        </section>
+
+
+                        <!--section data-markdown="markdown/features/promise-methods.md" data-separator="^\n\n\n" data-vertical="^\n\n" data-notes="^Note:">
+
+                        </section>
+
+                        <section data-markdown="markdown/features/class-features.md" data-separator="^\n\n\n" data-vertical="^\n\n" data-notes="^Note:">
+
+                        </section-->
+
+
+
+                    </section>
+
+
+                    <section>
+                        <section data-markdown="markdown/multi-three/maps.md">
+
+                        <aside class="notes">
+                            <!--//TODO show import + Proxy + Reflect + Map + Set + Promises + WeakMap + WeakSet -->
+                            <ol>
+                                <li>Hey you.  Go line by line.</li>
+                                <li>Make sure to go into how yield pauses execution until the next time data is needed.</li>
+
+                            </ol>
+
+                        </aside>
+                    </section>
+
+				</section>
+
+                <section>
+                    <section>
+                    <h2>More Classes</h2>
+                    </section>
+
+
+                <section data-markdown data-separator="^\n\n\n" data-vertical="^\n\n" data-notes="^Note:">
+                    ```
+                    class Parent {
+                      constructor(eek) {
+                      this.eek = eek;
+                      }
+                      height(h) {
+                        if(h) {
+                          this.h =h;}
+                        else {
+                          return this.h;
+                        }
+                      }
+                    }
+
+                    ```
+
+                </section>
+
+
+                <section data-markdown data-separator="^\n\n\n" data-vertical="^\n\n" data-notes="^Note:">
+                    ```
+                    class Child extends Parent {
+                      constructor() {
+                        super(10);
+                      }
+                      height(h) {
+                        super.height(h);
+                        this.h2=h;
+                      }
+
+                      static defaultKid() {
+                        var toBe = new Child();
+                        toBe.height(32);
+                        toBe.name = 'Shakespeare';
+                        return toBe;
+                      }
+
+                    }
+                    ```
+
+                </section>
+
+
+
+                </section>
+
+		<section>
+
+		  <h2>Available tools - Traceur</h2>
+		  <ul>
+			<li>grunt-traceur</li>
+			<li>gulp-traceur</li>
+		  </ul>
+
+		</section>
+
+		<section>
+		  <h2>Steps to use grunt-traceur</h2>
+		  <ol>
+			<li>npm install grunt-traceur --save-dev</li>
+			<li>Update your gruntfile</li>
+			<li>Profit??</li>
+		  </ol>
+		  <div>Will need to add watch as well and choose the destination of the js files.  In addition, you should choose a module type.  CommonJS and AMD(require) are also supported as well as an option that compiles everything into one file.</div>
+		</section>
+
+                <section>
+                    <h2>Current Spec Discussion</h2>
+                    <ul>
+                        <li>Generator Comprehensions</li>
+                        <li>ES6 modules</li>
+                        <li>TC39 vs the Community</li>
+                        <li>Node modules</li>
+                        <li>Object.observe - Definitely in ES7, but no one got the message</li>
+                    </ul>
+                    <aside class="notes">
+                        <ol>
+                            <li>Generator comprehensions: concerns about parallelization (Perhaps automatic)</li>
+                            <li>Modules: what is the this.  When doing modules, what is the equivalent of __dirname.  module command, defaults</li>
+                            <li>Observe: Moved to ES7.  People are already moving forward with implementation/use, which makes it somewhat risky, more in regard to divergent implementations </li>
+                        </ol>
+                    </aside>
+                </section>
+
+                <section>
+					<h2>Questions?</h2>
+				</section>
+
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+                width:1600,
+                height: 1050,
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Parallax scrolling
+				// parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+				// parallaxBackgroundSize: '2100px 900px',
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
