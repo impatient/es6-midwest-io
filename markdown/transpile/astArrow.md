@@ -1,21 +1,20 @@
 AST Arrow
 ---
-```
-{  'ArrowFunctionExpression', 
-  id: null,
-  params: 
-   [ { type: 'Identifier', name: 'a', loc: [Object] },
-     { type: 'Identifier', name: 'b', loc: [Object] } ],
-  defaults: [],
-  body: 
-   { type: 'BinaryExpression',
-     operator: '+',
-     left: { type: 'Identifier', name: 'a', loc: [Object] },
-     right: { type: 'Identifier', name: 'b', loc: [Object] },
-     loc: { start: [Object], end: [Object] } },
-  rest: null,
-  generator: false,
-  expression: true   
-  }
-```  
+<div class="syntax">
+  <span class="statement">
+    ArrowFunctionExpression
+  </span>
+  <span class="statement">
+      Parameters (a,b) 
+  </span>
+  <div class="syntax">
+    <span class="statement">
+      BinaryExpression
+    </span>
+    
+  </div>  
+  
+</div>  
+
+####Note the implicit return
   

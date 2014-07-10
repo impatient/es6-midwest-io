@@ -13,6 +13,32 @@
   */
   font-weight: normal;
   font-style: normal; }
+#slides-link {
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
+  margin: 5px;
+  z-index: 1;
+  background-color: rgba(0, 0, 0, 0.7); }
+  #slides-link a {
+    color: white; }
+
+div.syntax {
+  margin: 10px 20px;
+  text-align: left; }
+
+span.statement {
+  display: inline;
+  background-color: teal;
+  border-radius: 10px;
+  border: 3px solid #586e75;
+  margin: 10px;
+  padding: 0 5px; }
+
+.reveal section {
+  background-color: rgba(0, 0, 0, 0.5);
+  min-height: 50%; }
+
 .reveal pre code {
   padding: 5px;
   overflow: auto;

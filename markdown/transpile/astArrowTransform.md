@@ -20,10 +20,27 @@ var Arrow = Visitor.extend( {
 
 });
 
+ var ast = recast.parse(code);
  new Arrow().visit(ast);
  
  var output = recast.print(ast).code;
  
  console.log(output);
  
+ ```
+
+
+
+
+Fix Body
+---
+ ```
+    var fixBody = function(body) {
+      if(body.type !== Syntax.BlockStatement) {
+    
+        return b.blockStatement([b.returnStatement(body)]);
+      }
+      return body;
+    
+    };
  ```

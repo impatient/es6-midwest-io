@@ -9,7 +9,7 @@ Transform
             prop.key,
             this.visit(prop.value),
             prop.method,
-            false);
+            false);//is shorthand 
         }.bind(this));
    
         return b.objectExpression(newProperties);

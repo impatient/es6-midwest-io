@@ -43,7 +43,9 @@
 	<body>
 
 		<div class="reveal">
-
+            <div id="slides-link">
+                <a href="http://f5complex.com/midwest-io">http://f5complex.com/midwest-io</a>
+            </div>
 			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
 				<section>
@@ -64,32 +66,35 @@
 				<section>
 					<h2>Overview</h2>
 					<ul>
-                        <li>Should you use it today?</li>
-                        <li>How it works today</li>
-                        <li>What ES6 gives us</li>
-                        <li>Types of features</li>
-                        <li>How the existing tools work</li>
-                        <li>Quick run through of the new features</li>
-                        <li>Clarity on spec status</li>
+                        <li>Why you should use it today</li>
+                        <li>How it works(AKA a brief intro to transpilers)</li>
+                        <li>Feature Summary</li>
+                        <li>Features in Code</li>
+                        <li>ES6 tools</li>
+                        <li>Spec Status</li>
+                        <li>Curated Links</li>
                         <li>Questions?</li>
 					</ul>
 
                     <aside class="notes">
                         <ol>
-                            <li>Yes; Is it the wild west.  Not really.</li>
                             <li>Goal of the talk:  Already loads of information out there.  I aim to distill it and provide access to the better content.</li>
-                            <li>No object.observe. </li>
-                            <li>Proxies implemented differently.  Older version of the spec</li>
-                            <li>Syntactic sugar vs actual new features.  </li>
-                            <li>Comparison to Coffee script</li>
-
+                            <li>Mention dilemma of lots of talks out there, not necessarily with many views</li>
+                            <li>Also mention that there's one JS talk at the conference.</li>
                         </ol>
                     </aside>
 				</section>
                 <section>
                     <h2>What is ES6/Should you use it today</h2>
                     <p>
-                        ES6 is the result of years long work by the TC39 standards body (Comprised of representatives from various tech companies)
+                        ES6 is the next iteration of javascript.  Members of the TC39 working group review proposals and decide
+                        on what should be included in the next version of the language.  The group is comprised of members from
+                        various tech companies.
+                    </p>
+                    <p class="fragment">
+                        You should use it today because we're to a point where we can replicate a large chunk of the
+                        functionality inside of current latest ECMAScript version (ES 5).
+                        The last vestige of pre-ES5 environment is IE8.
                     </p>
                 </section>
                 <!--section>
@@ -101,6 +106,19 @@
                     </ul>
                 </section-->
                 <section>
+                    <h2>Current Browser Share</h2>
+                    <div><img src="images/browserMarketShareMay2014.png"></div>
+                </section>
+                <section>
+                    <h2>ES5 Compatibility Chart</h2>
+                    <div><img src="images/ie8-es5.png" alt=""/></div>
+                    <aside class="notes">
+                        <ol>
+                            <li>Additionally, we're to the point where browsers are released more frequently.</li>
+                        </ol>
+                    </aside>
+                </section>
+                <section>
                     <h2>Evergreen Browsers</h2>
                     <p>
                         We're finally to a point where all of the major browsers will be on a relatively frequent release cycle.
@@ -110,6 +128,14 @@
                         <li>Chrome - 8 releases in the past year</li>
                         <li>IE - last two major releases were in October of 2012 and 2013.</li>
                     </ul>
+                    <aside class="notes">
+                        <ol>
+                            <li>Evergreen browser phrase was coined by:  </li>
+                            <li>The big point is that everyone is automatically updated.</li>
+                            <li>I'm not trying to actively say that we have Evergreen and ES5.  It's more like hedging your bets</li>
+                        </ol>
+                    </aside>
+
                 </section>
                 <section>
                     <h2>We have the technology</h2>
@@ -123,13 +149,27 @@
                     </ul>
                 </section>
                 <section>
-                    <h2>Current Browser Share</h2>
-                    <div><img src="images/browserMarketShareMay2014.png"></div>
+                    <h2>Play along</h2>
+                    <div><p>An ES6 repl can be found at:  <a href="http://google.github.io/traceur-compiler/demo/repl.html">http://google.github.io/traceur-compiler/demo/repl.html</a></p></div>
+
+                    <h2>Slides at:</h2>
+                    <div> <p>Web: <a href="http://f5complex.com/midwest-io">http://f5complex.com/midwest-io</a></p>
+                          <p>Source: <a href="https://github.com/impatient/es6-midwest-io">https://github.com/impatient/es6-midwest-io</a></p>
+
+                    </div>
+
+
                 </section>
                 <section>
-                    <h2>ES5 Compatibility Chart</h2>
-                    <div><img src="images/ie8-es5.png" alt=""/></div>
+                    <h2>Traceur Repl</h2>
+                    <pre>
+                        <code>
+                            var es6 = 'es6';
+                            console.log(`hello ${es6} world`);
+                        </code>
+                    </pre>
                 </section>
+
                 <section>
                     <h2>Summary of New Features</h2>
                     <ul>
@@ -141,8 +181,11 @@
                         <li>Proxies</li>
                         <li>Reflection</li>
                         <li>Numerous Utility Methods</li>
-                        <li>Imports</li>
+                        <li>Import/Export</li>
+                        <li>Math functions</li>
+                        <li>String functions</li>
                     </ul>
+                    <aside class="notes">Dilemma - Lots of really good articles out there.  With 600 views.  So, how much have people really seen.</aside>
 
                 </section>
                 <section>
@@ -159,18 +202,25 @@
                     </section>
                     <section data-markdown>
                         <script type="text/template">
-                            Rest Parameters - Syntactic Sugar
+                            ####Rest Parameters - Syntactic Sugar - ES6
                             ```
-                            function rest(a, ...b) { console.log(a,b); };
+                            function rest(initialParameter, ...restOfParameters) {
+                              console.log(initialParameters,restOfParameters);
+                            };
+
                             rest(1,2,3,4);
                             //1,[2,3,4]
 
                             ```
                             </script>
+                        <aside class="notes">
+                            Make sure to mention that it works for any number of arguments, but it must be last.
+                        </aside>
                         </section>
 
                     <section data-markdown>
                         <script type="text/template" class="fragment">
+                            ####ES5 Version ####
                             ```
                             function unrest(a,b) { console.log(a,b); }
 
@@ -190,17 +240,18 @@
 
 
                             ```
+                            #### The function restEnd decorates unrest to get the same behavior.  ####
                         </script>
 
                         <aside class="notes">
                             <p>Originally had the 'spread' in the middle, which can be done with JS, but isn't part of ES spec. It also really killed a sample for handlebar-helpers. </p>
-
+                            <p>Ask someone to identify why it is buggy</p>
                         </aside>
                     </section>
                     <section data-markdown>
 
                         <script type="text/template">
-                        Proxy - New Functionality
+                        ####Proxy - New Functionality
 
                         ```
                         var a = Proxy({}, {
@@ -229,7 +280,7 @@
                     </section>
                     <section data-markdown>
                         <script type="text/template">
-                            Generators - Borderline
+                            ####Generators - Borderline
                             ```
                             var numberator = function*(base) {
                               while(base < 4) {
@@ -289,10 +340,155 @@
                 <section>
                     <h2>Transpilers in Action</h2>
                     <ul>
+                        <li>A brief look at syntax trees</li>
                         <li>Arrow Function</li>
                         <li>Shorthand Object</li>
                     </ul>
 
+
+                </section>
+
+                <section>
+                    <section>
+                        <h2>Abstract Syntax Trees</h2>
+                        <ul>
+                            <li>Representation of a program that can be acted on by language</li>
+                            <li>Statements</li>
+                            <li>Declarations</li>
+                            <li>Expressions</li>
+                            <li>Operators</li>
+                            <li>Literals</li>
+                        </ul>
+                        <p class="fragment">Esprima repl can be found at <a href="http://esprima.org/demo/parse.html">http://esprima.org/demo/parse.html</a></p>
+
+                    </section>
+
+                    <section>
+                        <h2>Trivial Example</h2>
+                        <pre>
+                            <code class="javascript">
+                                ;
+                            </code>
+                         </pre>
+                           <p> yields </p>
+                        <pre>
+                            <code class="json">
+                                {
+                                "type": "EmptyStatement"
+                                }
+                            </code>
+                        </pre>
+
+
+                    </section>
+
+                    <section>
+                        <h2>Marginally Less Trivial Example</h2>
+                        <pre>
+                            <code class="javascript">
+                                var a = function(one) { console.log(1); };
+                            </code>
+                         </pre>
+                        <p> yields </p>
+                        <pre>
+                            <code class="json">
+                                {
+                                "type": "VariableDeclaration",
+                                "declarations": [
+                                {
+                                "type": "VariableDeclarator",
+                                "id": {
+                                "type": "Identifier",
+                                "name": "a"
+                                },
+                                "init": {
+                                "type": "FunctionExpression",
+                                "id": null,
+                                "params": [
+                                {
+                                "type": "Identifier",
+                                "name": "one"
+                                }
+                                ],
+                                "defaults": [],
+                                "body": {
+                                "type": "BlockStatement",
+                                "body": [
+                                {
+                                "type": "ExpressionStatement",
+                                "expression": {
+                                "type": "CallExpression",
+                                "callee": {
+                                "type": "MemberExpression",
+                                "computed": false,
+
+                            </code>
+                        </pre>
+
+                    </section>
+                    <section>
+                        <pre>
+                            <code>"object": {
+                                "type": "Identifier",
+                                "name": "console"
+                                },
+                                "property": {
+                                "type": "Identifier",
+                                "name": "log"
+                                }
+                                },
+                                "arguments": [
+                                {
+                                "type": "Identifier",
+                                "name": "one"
+                                }
+                                ]
+                                }
+                                }
+                                ]
+                                },
+                                "rest": null,
+                                "generator": false,
+                                "expression": false
+                                }
+                                }
+                                ],
+                                "kind": "var"
+                                }</code>
+                        </pre>
+
+                    </section>
+                    <section>
+                        <h2>Why is this relevant?</h2>
+                        <p class="fragment">Partially, to instill a sense of fear.  Tools make management easier, but you're likely not Superman</p>
+                        <div class="fragment">
+                            <p>That's not a suitable way to display the data.  We'll eschew some of the information in favor of:</p>
+                            <div class="syntax">
+                                <span class="statement">VariableDeclaration</span>
+                                <div class="syntax">
+                                    <span class="statement">VariableDeclarator</span>
+                                    <div class="syntax">
+                                        <span class="statement">FunctionExpression + Param Identifier</span>
+                                        <div class="syntax">
+                                            <span class="statement">BlockStatement</span>
+                                            <div class="syntax">
+                                                <span class="statement">ExpressionStatement</span>
+                                                <div class="syntax">
+                                                    <span class="statement">CallExpression</span>
+                                                    <div class="syntax">
+                                                        <span class="statement">MemberExpression+Identifier</span>
+
+                                                    </div>
+                                                    <span class="statement">Argument</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </section>
 
                 </section>
 
@@ -315,6 +511,10 @@
 
 
                     <section data-markdown="markdown/transpile/astArrowEquivalent.md" data-separator="^\n\n\n" data-vertical="^\n\n" data-notes="^Note:">
+
+                    </section>
+
+                    <section data-markdown="markdown/transpile/intro-recast.md" data-separator="^\n\n\n" data-vertical="^\n\n" data-notes="^Note:">
 
                     </section>
 
@@ -556,8 +756,8 @@
 				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
 
 				// Parallax scrolling
-				 parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
-				 parallaxBackgroundSize: '2100px 900px',
+				 parallaxBackgroundImage: 'images/skyline.jpg',
+				 parallaxBackgroundSize: '2100px 1000px',
 
 				// Optional libraries used to extend on reveal.js
 				dependencies: [

@@ -1,15 +1,15 @@
 ### Spread Operator
 ```
-var a = [1,2,3];
+var a = [1,2,3,4];
 
-var sum = function(one,two, three) { 
+var sum = function(first,second, third,fourth) {
+  console.log(fourth); //4
   return Array.from(arguments).
   reduce( 
-    (memo, b) => { return b + memo; },0
+    (a, b) => a+b
   );
   
-};
-      
+};      
  
-console.log(sum(...a)); //6
+console.log(sum(...a)); //10
 ```

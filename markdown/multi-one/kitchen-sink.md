@@ -13,7 +13,7 @@ var gen = function *(...two ) { //generator + rest params
 }
 for(let z of gen(0,1)) { //generator + let
   var q = [ for (n of gen(...[0,1])) if (n=== z) n ]  //iterators + array comprehension + spread operator
-  console.log(````Runtime complexity ${q}````); //string templating
+  console.log(`Runtime complexity ${q}`); //string templating
 }
 
 export gen //modules

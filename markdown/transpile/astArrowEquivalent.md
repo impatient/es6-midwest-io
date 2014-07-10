@@ -1,35 +1,28 @@
 ES5 Equivalent
 ---
-```
-     "type": "FunctionExpression",
-                           "id": null,
-                           "params": [
-                               { "type": "Identifier", "name": "a" },
-                               { "type": "Identifier", "name": "b" }
-                           ],
-                           "body": {
-                               "type": "BlockStatement",
-                               "body": [
-                                   {
-                                       "type": "ReturnStatement",
-                                       "argument": {
-                                           "type": "BinaryExpression",
-                                           "operator": "+",
-                                           "left": {
-                                               "type": "Identifier",
-                                               "name": "a"
-                                           },
-                                           "right": {
-                                               "type": "Identifier",
-                                               "name": "b"
-                                           }
-                                       }
-                                   }
-                               ]
-                           },
-                           "rest": null,
-                           "generator": false,
-                           "expression": false
-                       }
+<div class="syntax">
+  <span class="statement">VariableDeclaration</span>
+  <div class="syntax">
+    <span class="statement">VariableDeclarator</span>
+    <div class="syntax">
+      <span class="statement">CallExpression</span>
+      <div class="syntax">
+        <span class="statement">MemberExpression</span>
+         <div class="syntax">
+          <span class="statement">FunctionExpression</span>
+            <div class="syntax">
+              <span class="statement">BlockStatement</span>
+              <div class="syntax">
+                <span class="statement">ReturnStatement</span>
+                <span class="statement">BinaryExpression</span>
+              </div>
+            </div>
+         </div>
+         <span class="statement">Param - Identifier - Bind</span>
+      </div>
+      <span class="statement">Argument - ThisExpression</span>  
+    </div>
+  </div>
+</div>
 
-```
+     
