@@ -28,7 +28,16 @@ $mainFontSize: 28px;
 $mainColor: #eee;
 
 $headingFont: 'Cabin Sketch', 'cursive';
+.reveal div.halign.fifty {
+  width:49%;
+  display:inline-block;
+}
+.halign > div {
+  text-align:left;
+  padding-left:10px;
+}
 
+.reveal p.spaced { margin-top:20px;}
 #slides-link {
   position:fixed;
   bottom:0px;

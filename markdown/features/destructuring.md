@@ -1,9 +1,9 @@
 ### Destructuring Object
 ```
-   var {key, example} = { key: '123456', example: 'elpmaxe' };
+   var {username, password} = { password: '123456', username: 'elpmaxe' };
    
-   console.log(key);
-   //123456
-   console.log(example);
+   console.log(username);
    //elpmaxe
+   console.log(password);
+   //123456
 ```

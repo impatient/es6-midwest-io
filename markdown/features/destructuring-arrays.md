@@ -1,13 +1,13 @@
 ### Destructuring Arrays
 ```
-var [zero, one, two] = ['zero','one','two','three'];
+var [first, second, third] = ['zero','one','two','three'];
  
- console.log(zero);
+ console.log(first);
  //zero
  
- console.log(one);
+ console.log(second);
  //one
  
- console.log(two);
+ console.log(third);
  //two
  ```

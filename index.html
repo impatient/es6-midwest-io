@@ -4,7 +4,7 @@
 	<head>
 		<meta charset="utf-8">
 
-		<title>reveal.js - The HTML Presentation Framework</title>
+		<title>Using ECMAScript 6 Today</title>
 
 		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
 		<meta name="author" content="Hakim El Hattab">
@@ -49,7 +49,7 @@
 			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
 				<section>
-					<h2>ECMAScript 6 in enough depth to get you curious, but not really get anything productive done with it.<span class="fragment">(Working title)</span> </h2>
+                    <h2>Using ECMAScript 6 Today</h2>
 					<p>
 						Scott Dillender (@smimp)
 					</p>
@@ -85,17 +85,22 @@
                     </aside>
 				</section>
                 <section>
-                    <h2>What is ES6/Should you use it today</h2>
-                    <p>
+                    <h3>Should you use it today?</h3>
+                    <h2 class="fragment">
+                        YES.
+                    </h2>
+                    <p class="fragment">
+                        We're at a point where we can replicate a large chunk of the
+                        functionality inside of current ECMAScript version (ES 5).
+                        The last vestige of pre-ES5 environment is IE8.
+                    </p>
+                    <aside class="notes">
                         ES6 is the next iteration of javascript.  Members of the TC39 working group review proposals and decide
                         on what should be included in the next version of the language.  The group is comprised of members from
                         various tech companies.
-                    </p>
-                    <p class="fragment">
-                        You should use it today because we're to a point where we can replicate a large chunk of the
-                        functionality inside of current latest ECMAScript version (ES 5).
-                        The last vestige of pre-ES5 environment is IE8.
-                    </p>
+
+                        Bring up bytecode for the web and how transpilers are the future.  DSL's for javascript.
+                    </aside>
                 </section>
                 <!--section>
                     <h2>How it works today</h2>
@@ -110,7 +115,7 @@
                     <div><img src="images/browserMarketShareMay2014.png"></div>
                 </section>
                 <section>
-                    <h2>ES5 Compatibility Chart</h2>
+                    <h2>ES5 Compatibility Chart (via kangax)</h2>
                     <div><img src="images/ie8-es5.png" alt=""/></div>
                     <aside class="notes">
                         <ol>
@@ -140,13 +145,20 @@
                 <section>
                     <h2>We have the technology</h2>
                     <p>
-                        With features added in ES5, most of the features in ES6 can be implemented with a polyfill or with some clever code rewriting.
+                        With features added in ES5, most of the features in ES6 can be implemented with a polyfill or transpiling.
                     </p>
-                    <div>Tools that support this:</div>
-                    <ul>
-                        <li>Traceur - Google</li>
-                        <li>Regenerator/Recast - Facebook</li>
-                    </ul>
+                    <div>
+                        <ul>
+                            <li>Traceur - Google</li>
+                            <li>Regenerator/Recast/JSTransform - Facebook</li>
+                            <li>ES6 Transpiler</li>
+                            <li>ES6-Shim</li>
+                            <li>Harmony Collections</li>
+                            <li>Polymer's Shims</li>
+                        </ul>
+                    </div>
+
+                    <p class="spaced">Many more depending on what you're actually looking for.  <a href="https://github.com/addyosmani/es6-tools">https://github.com/addyosmani/es6-tools</a></p>
                 </section>
                 <section>
                     <h2>Play along</h2>
@@ -184,8 +196,9 @@
                         <li>Import/Export</li>
                         <li>Math functions</li>
                         <li>String functions</li>
+                        <li>Modules</li>
                     </ul>
-                    <aside class="notes">Dilemma - Lots of really good articles out there.  With 600 views.  So, how much have people really seen.</aside>
+                    <aside class="notes">Dilemma - Lots of really good articles/videos out there.  With 600 views.  So, how much have people really seen.</aside>
 
                 </section>
                 <section>
@@ -194,7 +207,7 @@
 
                         <ul>
                             <li>Syntactic Sugar
-                                <p>If you're creative/masochistic, you may already have some of these.  Of course, it's probably very verbose.</p>
+                                <p>Expressivity - Fewer words, more meaning</p>
                             </li>
 
                             <li>Features that are completely new and can't be replicated.</li>
@@ -205,14 +218,16 @@
                             ####Rest Parameters - Syntactic Sugar - ES6
                             ```
                             function rest(initialParameter, ...restOfParameters) {
-                              console.log(initialParameters,restOfParameters);
+                              console.log(initialParameter,restOfParameters);
                             };
 
                             rest(1,2,3,4);
                             //1,[2,3,4]
 
                             ```
+                            #### Rest placement must be at end, but can have preceding params
                             </script>
+
                         <aside class="notes">
                             Make sure to mention that it works for any number of arguments, but it must be last.
                         </aside>
@@ -240,12 +255,12 @@
 
 
                             ```
-                            #### The function restEnd decorates unrest to get the same behavior.  ####
+                            #### The function restEnd decorates unrest to get the same behavior as the ES6 version.
                         </script>
 
                         <aside class="notes">
                             <p>Originally had the 'spread' in the middle, which can be done with JS, but isn't part of ES spec. It also really killed a sample for handlebar-helpers. </p>
-                            <p>Ask someone to identify why it is buggy</p>
+                            <p>Ask someone to identify why it is buggy (Instead of 1 on the slice, needs to be unrest.length-1</p>
                         </aside>
                     </section>
                     <section data-markdown>
@@ -255,24 +270,35 @@
 
                         ```
                         var a = Proxy({}, {
-                            get: function() { console.log("get arguments", arguments); },
+                            get: function() {
+                                console.log("get arguments", arguments);
+                                return obj[prop];
+                            },
                             set: function(obj, prop, newVal) {
-                                console.log("Calling set with ", arguments); obj[prop] = newVal;    }
-                            });
+                                console.log("Calling set with ", arguments);
+                                obj[prop] = newVal;
+                            }
+                          }
+                        );
                         a.eek = 'bam';
 
                         Returns: "Calling set with " Arguments
                            {0: Object, 1: "eek", 2: "bam", 3: Object, 2 more…}
 
                         ```
+
+                        ####Presently Firefox is the only browser with support for this.  Traceur does not implement.
                         </script>
 
                         <aside class="notes">
                             <ul>
                                 <li>How about how this works.  Proxy can intercept all sorts of calls.</li>
                                 <li>As late May Firefox had the most complete implementation</li>
-                                <li>Traceur could do it, but would incur performance penalties.</li>
+                                <li>Traceur could do it(how, I'm not sure), but would incur performance penalties.</li>
                                 <li>Need to use the reflection API to get this.  Brendan Eich was corrected on the mailing list.  </li>
+                                <li>Proxy hooks are:  getOwnPropertyDescriptor, getOwnPropertyNames, defineProperty, deleteProperty, freeze, seal,
+                                    preventExtensions, has, hasOwn, get, set, enumerate, iterate, ownKeys, apply, construct</li>
+                                <li>A use case for proxies is if you have an aria item that needs to have aria-selected, use a proxy to set that value and unset on the old one.</li>
                             </ul>
                         </aside>
 
@@ -290,7 +316,7 @@
                             };
 
                             //Array comprehension
-                            console.log([for ( x1 of numberator(0)) x1]);
+                            console.log([for ( x1 of numberator(0)) x1]); //no longer lazy
                             //[1,2,3,4]
                         ```
                         </script>
@@ -338,13 +364,22 @@
                 </section>
 
                 <section>
+                    <h2>What we've seen so far</h2>
+                    <ul>
+                        <li>Rest parameters (...)</li>
+                        <li>Proxies</li>
+                        <li>Generators</li>
+                        <li>Array Comprehension</li>
+                    </ul>
+                </section>
+
+                <section>
                     <h2>Transpilers in Action</h2>
                     <ul>
                         <li>A brief look at syntax trees</li>
                         <li>Arrow Function</li>
-                        <li>Shorthand Object</li>
                     </ul>
-
+                    <aside class="notes">Start the conversation as the language as the library.</aside>
 
                 </section>
 
@@ -459,10 +494,10 @@
 
                     </section>
                     <section>
-                        <h2>Why is this relevant?</h2>
-                        <p class="fragment">Partially, to instill a sense of fear.  Tools make management easier, but you're likely not Superman</p>
-                        <div class="fragment">
-                            <p>That's not a suitable way to display the data.  We'll eschew some of the information in favor of:</p>
+                        <h2>Or, more sensibly displayed</h2>
+
+                        <div>
+                            <p>We'll eschew some of the information in favor displaying it more sensibly.</p>
                             <div class="syntax">
                                 <span class="statement">VariableDeclaration</span>
                                 <div class="syntax">
@@ -477,7 +512,6 @@
                                                     <span class="statement">CallExpression</span>
                                                     <div class="syntax">
                                                         <span class="statement">MemberExpression+Identifier</span>
-
                                                     </div>
                                                     <span class="statement">Argument</span>
                                                 </div>
@@ -487,6 +521,8 @@
                                 </div>
                             </div>
                         </div>
+
+                        <p class="fragment">If you go down this path, it appears unwieldy, but with the proper tools/libraries you can handle it, within reason.</p>
 
                     </section>
 
@@ -523,81 +559,63 @@
                     </section>
 
                 </section>
-
                 <section>
-                    <section>
-                        <h2>Shorthand Object</h2>
-                    </section>
-                    <section data-markdown="markdown/transpile/shorthandSample.md" data-separator="^\n\n\n" data-vertical="^\n\n" data-notes="^Note:">
+                    <section><h2>Quick Samples</h2></section>
+                    <section data-markdown="markdown/features/defaultParams.md" data-separator="^\n\n\n" data-vertical="^\n\n" data-notes="^Note:">
 
                     </section>
 
-                    <section data-markdown="markdown/transpile/astShorthand.md" data-separator="^\n\n\n" data-vertical="^\n\n" data-notes="^Note:">
+                    <section data-markdown="markdown/features/destructuring.md" data-separator="^\n\n\n" data-vertical="^\n\n" data-notes="^Note:">
 
                     </section>
 
-                    <section data-markdown="markdown/transpile/astShorthandEquivalent.md" data-separator="^\n\n\n" data-vertical="^\n\n" data-notes="^Note:">
+                    <section data-markdown="markdown/features/destructuring-arrays.md" data-separator="^\n\n\n" data-vertical="^\n\n" data-notes="^Note:">
 
                     </section>
 
-                    <section data-markdown="markdown/transpile/astShorthandTransform.md" data-separator="^\n\n\n" data-vertical="^\n\n" data-notes="^Note:">
+                    <section data-markdown="markdown/features/generator.md" data-separator="^\n\n\n" data-vertical="^\n\n" data-notes="^Note:">
+
+                    </section>
+
+                    <section data-markdown="markdown/features/let-const.md" data-separator="^\n\n\n" data-vertical="^\n\n" data-notes="^Note:">
+
+                    </section>
+
+                    <section data-markdown="markdown/features/comprehension.md" data-separator="^\n\n\n" data-vertical="^\n\n" data-notes="^Note:">
+
+                    </section>
+
+                    <section data-markdown="markdown/features/spread.md" data-separator="^\n\n\n" data-vertical="^\n\n" data-notes="^Note:">
+
+                    </section>
+
+                    <section data-markdown="markdown/features/string-templates.md" data-separator="^\n\n\n" data-vertical="^\n\n" data-notes="^Note:">
 
                     </section>
 
                 </section>
 
-
-
-
-					<section>
-                        <!-- TODO Do this with css -->
-						<h2><strike>ES6 in 3 Easy Slides</strike></h2>
-                        <h2 class="fragment"><strike>Frankenfunctions</strike></h2>
-                        <h2 class="fragment">The One With the Friends Reference?</h2>
-
-
-
-					</section>
+                <section>
+                    <section>
+                        <h2>Practical Example Accessibility - Aria</h2>
+                        <h3>Managing tabindex/visibility</h3>
+                    </section>
+                    <section data-markdown="markdown/accessibility/find-focus-setup.md" data-separator="^\n\n\n" data-vertical="^\n\n" data-notes="^Note:">
+                    </section>
+                    <section data-markdown="markdown/accessibility/find-focus-body.md" data-separator="^\n\n\n" data-vertical="^\n\n" data-notes="^Note:">
+                    </section>
+                </section>
 
                 <section>
-                        <section data-markdown="markdown/multi-one/kitchen-sink.md" data-separator="^\n\n\n" data-vertical="^\n\n" data-notes="^Note:">
-
-                        </section>
-
-                        <section data-markdown="markdown/features/defaultParams.md" data-separator="^\n\n\n" data-vertical="^\n\n" data-notes="^Note:">
-
-                        </section>
-
-                        <section data-markdown="markdown/features/destructuring.md" data-separator="^\n\n\n" data-vertical="^\n\n" data-notes="^Note:">
-
-                        </section>
-
-                        <section data-markdown="markdown/features/destructuring-arrays.md" data-separator="^\n\n\n" data-vertical="^\n\n" data-notes="^Note:">
-
-                        </section>
-
-                        <section data-markdown="markdown/features/generator.md" data-separator="^\n\n\n" data-vertical="^\n\n" data-notes="^Note:">
-
-                        </section>
-
-                        <section data-markdown="markdown/features/let-const.md" data-separator="^\n\n\n" data-vertical="^\n\n" data-notes="^Note:">
-
-                        </section>
-
-                        <section data-markdown="markdown/features/comprehension.md" data-separator="^\n\n\n" data-vertical="^\n\n" data-notes="^Note:">
-
-                        </section>
-
-                        <section data-markdown="markdown/features/spread.md" data-separator="^\n\n\n" data-vertical="^\n\n" data-notes="^Note:">
-
-                        </section>
-
-                        <section data-markdown="markdown/features/string-templates.md" data-separator="^\n\n\n" data-vertical="^\n\n" data-notes="^Note:">
-
-                        </section>
-
-
+                    <section>
+                        <h4>Continued...</h4>
+                        <h3>Adding O(1) Lookup</h3>
                     </section>
+                    <section data-markdown="markdown/multi-three/maps.md" data-separator="^\n\n\n" data-vertical="^\n\n" data-notes="^Note:"> </section>
+
+                    <section data-markdown="markdown/accessiblity/find-focus-weakmaps.md" >
+                    </section>
+                </section>
 
                     <section>
 
@@ -623,74 +641,16 @@
                     </section>
 
 
-                    <section>
-                        <section data-markdown="markdown/multi-three/maps.md">
-
-                        <aside class="notes">
-                            <!--//TODO show import + Proxy + Reflect + Map + Set + Promises + WeakMap + WeakSet -->
-                            <ol>
-                                <li>Hey you.  Go line by line.</li>
-                                <li>Make sure to go into how yield pauses execution until the next time data is needed.</li>
-
-                            </ol>
-
-                        </aside>
-                    </section>
-
-				</section>
-
                 <section>
-                    <section>
-                    <h2>More Classes</h2>
-                    </section>
-
-
-                <section data-markdown data-separator="^\n\n\n" data-vertical="^\n\n" data-notes="^Note:">
-                    ```
-                    class Parent {
-                      constructor(eek) {
-                      this.eek = eek;
-                      }
-                      height(h) {
-                        if(h) {
-                          this.h =h;}
-                        else {
-                          return this.h;
-                        }
-                      }
-                    }
-
-                    ```
+                    <h2>Modules</h2>
+                    <ul>
+                        <li>TC39 focused on static verification</li>
+                        <li>Worked to make the module system workable for everyone (Node vs Web)</li>
+                        <li>Finalization still underway (module vs import * from fs as 'whatever')</li>
+                    </ul>
 
                 </section>
 
-
-                <section data-markdown data-separator="^\n\n\n" data-vertical="^\n\n" data-notes="^Note:">
-                    ```
-                    class Child extends Parent {
-                      constructor() {
-                        super(10);
-                      }
-                      height(h) {
-                        super.height(h);
-                        this.h2=h;
-                      }
-
-                      static defaultKid() {
-                        var toBe = new Child();
-                        toBe.height(32);
-                        toBe.name = 'Shakespeare';
-                        return toBe;
-                      }
-
-                    }
-                    ```
-
-                </section>
-
-
-
-                </section>
 
 		<section>
 
@@ -734,7 +694,95 @@
 					<h2>Questions?</h2>
 				</section>
 
-			</div>
+                <section>
+                    <h2>Outtakes</h2>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>Shorthand Object</h2>
+                    </section>
+                    <section data-markdown="markdown/transpile/shorthandSample.md" data-separator="^\n\n\n" data-vertical="^\n\n" data-notes="^Note:">
+
+                    </section>
+
+                    <section data-markdown="markdown/transpile/astShorthand.md" data-separator="^\n\n\n" data-vertical="^\n\n" data-notes="^Note:">
+
+                    </section>
+
+                    <section data-markdown="markdown/transpile/astShorthandEquivalent.md" data-separator="^\n\n\n" data-vertical="^\n\n" data-notes="^Note:">
+
+                    </section>
+
+                    <section data-markdown="markdown/transpile/astShorthandTransform.md" data-separator="^\n\n\n" data-vertical="^\n\n" data-notes="^Note:">
+
+                    </section>
+
+                </section>
+
+                <section>
+                    <section data-markdown="markdown/multi-one/kitchen-sink.md" data-separator="^\n\n\n" data-vertical="^\n\n" data-notes="^Note:">
+
+                    </section>
+
+                </section>
+
+                <section>
+                    <section>
+                        <h2>More Classes</h2>
+                    </section>
+
+
+                    <section data-markdown data-separator="^\n\n\n" data-vertical="^\n\n" data-notes="^Note:">
+                        ```
+                        class Parent {
+                        constructor(eek) {
+                        this.eek = eek;
+                        }
+                        height(h) {
+                        if(h) {
+                        this.h =h;}
+                        else {
+                        return this.h;
+                        }
+                        }
+                        }
+
+                        ```
+
+                    </section>
+
+
+                    <section data-markdown data-separator="^\n\n\n" data-vertical="^\n\n" data-notes="^Note:">
+                        ```
+                        class Child extends Parent {
+                        constructor() {
+                        super(10);
+                        }
+                        height(h) {
+                        super.height(h);
+                        this.h2=h;
+                        }
+
+                        static defaultKid() {
+                        var toBe = new Child();
+                        toBe.height(32);
+                        toBe.name = 'Shakespeare';
+                        return toBe;
+                        }
+
+                        }
+                        ```
+
+                    </section>
+
+
+
+                </section>
+
+
+
+            </div>
 
 		</div>
 

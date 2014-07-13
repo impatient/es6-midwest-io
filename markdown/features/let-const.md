@@ -1,4 +1,4 @@
-### Let and Const - Experimental 
+### Let and Const 
 ```
    const always= 'always';
    if(1 === 1) {
@@ -9,3 +9,7 @@
    
 
 ```
+####Caveat, under experimental in traceur.  
+Note: This is where a linter would be better than this behavior.
+ 
+ 

@@ -10,6 +10,7 @@ ES5 Equivalent
         <span class="statement">MemberExpression</span>
          <div class="syntax">
           <span class="statement">FunctionExpression</span>
+          <span class="statement">Parameters (a,b)</span>
             <div class="syntax">
               <span class="statement">BlockStatement</span>
               <div class="syntax">
