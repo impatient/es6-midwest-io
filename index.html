@@ -192,11 +192,10 @@
                         <li>Map/WeakMap/Set/WeakSet</li>
                         <li>Proxies</li>
                         <li>Reflection</li>
-                        <li>Numerous Utility Methods</li>
+                        <li>Object function</li>
                         <li>Import/Export</li>
                         <li>Math functions</li>
                         <li>String functions</li>
-                        <li>Modules</li>
                     </ul>
                     <aside class="notes">Dilemma - Lots of really good articles/videos out there.  With 600 views.  So, how much have people really seen.</aside>
 
@@ -270,7 +269,7 @@
 
                         ```
                         var a = Proxy({}, {
-                            get: function() {
+                            get: function(obj, prop) {
                                 console.log("get arguments", arguments);
                                 return obj[prop];
                             },
@@ -613,7 +612,7 @@
                     </section>
                     <section data-markdown="markdown/multi-three/maps.md" data-separator="^\n\n\n" data-vertical="^\n\n" data-notes="^Note:"> </section>
 
-                    <section data-markdown="markdown/accessiblity/find-focus-weakmaps.md" >
+                    <section data-markdown="markdown/accessibility/find-focus-weakmaps.md" >
                     </section>
                 </section>
 
@@ -815,7 +814,7 @@
 					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
 					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
 					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
-				]
+                ]
 			});
 
 		</script>
