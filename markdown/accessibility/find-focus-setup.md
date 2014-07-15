@@ -11,7 +11,8 @@ var timeFunction = function(toTime) { return () => {
 
 isHidden(domElement) {
     if(!domElement) {return true; }
-    return domElement.offsetWidth <= 0 && domElement.offsetWidth <= 0 || domElement.getAttribute('aria-hidden') === "true";
+    return domElement.offsetWidth <= 0 && domElement.offsetWidth <= 0 ||
+     domElement.getAttribute('aria-hidden') === "true";
   }
 ```
 

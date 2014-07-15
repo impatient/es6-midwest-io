@@ -610,7 +610,7 @@
                         <h4>Continued...</h4>
                         <h3>Adding O(1) Lookup</h3>
                     </section>
-                    <section data-markdown="markdown/multi-three/maps.md" data-separator="^\n\n\n" data-vertical="^\n\n" data-notes="^Note:"> </section>
+                    <section data-markdown="markdown/accessibility/find-focus-sliding.md" data-separator="^\n\n\n" data-vertical="^\n\n" data-notes="^Note:"> </section>
 
                     <section data-markdown="markdown/accessibility/find-focus-weakmaps.md" >
                     </section>
@@ -637,20 +637,74 @@
 
 
 
+
                     </section>
 
 
                 <section>
-                    <h2>Modules</h2>
-                    <ul>
-                        <li>TC39 focused on static verification</li>
-                        <li>Worked to make the module system workable for everyone (Node vs Web)</li>
-                        <li>Finalization still underway (module vs import * from fs as 'whatever')</li>
-                    </ul>
+                    <section>
+                        <h2>Modules</h2>
+                        <ul>
+                            <li>TC39 focused on static verification</li>
+                            <li>Worked to make the module system workable for everyone (Node vs Web)</li>
+                            <li>Finalization still underway (module vs import * from fs as 'whatever')</li>
+                        </ul>
 
-                </section>
+                    </section>
+                    <section>
+                        <h2>Syntax</h2>
+                        <pre>
+                            <code>
+
+//Lexer.js
+export  {Lexer};
+
+//valid, Lexer is an export
+import {Lexer} from 'Lexer';
+
+//valid, 'Lexer' has an export.
+//Lexer.Lexer is available
+module Lexer from 'Lexer';
+
+//same as line above.  only one will win
+import * as Lexer from 'Lexer' ;
+
+//invalid, because of no default
+import Lexer from 'Lexer';
+                            </code>
+                        </pre>
+                            </section>
+
+                        <section>
+                            <pre><code>
+//tokenClasses.js
+export var NEWLINE = new RegExp(/(\n+)/);
+export var SPACE = new RegExp(/([^\n][\s\t]+)/);
+export var WORD = new RegExp(/(\w+)/);
+export var PUNCT = new RegExp(/([\^\[\]\!\*\+\-`#])/);
+
+//import without any var request gets everything
+export default {SPACE, NEWLINE, WORD,PUNCT};
+
+//main.js
+// war with {SPACE, NEWLINE, WORD,PUNCT};
+import * as tokens from 'tokenClasses'
+module tokens from 'tokenClasses';
+
+//works. there is a default
+import tokenDefault from 'tokenClasses';
+
+//works
+import {SPACE} from 'tokenClasses';
+                            </code></pre>
 
 
+                        </ul>
+
+                    </section>
+
+
+</section>
 		<section>
 
 		  <h2>Available tools - Traceur</h2>
@@ -696,6 +750,8 @@
                 <section>
                     <h2>Outtakes</h2>
                 </section>
+
+                <section data-markdown="markdown/multi-three/maps.md" data-separator="^\n\n\n" data-vertical="^\n\n" data-notes="^Note:"> </section>
 
                 <section>
                     <section>

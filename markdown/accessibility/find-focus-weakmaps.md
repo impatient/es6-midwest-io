@@ -1,9 +1,10 @@
-Now with Weak Maps
+###Now with Weak Maps
 ```
 class ParseFocusable {
-//constructor
-this.forward = new WeakMap();
-this.reverse = new WeakMap();
+  constructor() {
+    this.forward = new WeakMap();
+    this.reverse = new WeakMap();
+  }
 
   buildTabOrder() {
     for(var [a,b] of sliding(this.focusArray())) {
