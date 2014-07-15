@@ -24,15 +24,21 @@
 .reveal p.spaced {
   margin-top: 20px; }
 
-#slides-link {
+#slides-link, #twitter-link {
   position: fixed;
   bottom: 0px;
-  left: 0px;
   margin: 5px;
   z-index: 1;
+  font-size: 24px;
   background-color: rgba(0, 0, 0, 0.7); }
-  #slides-link a {
+  #slides-link a, #twitter-link a {
     color: white; }
+
+#slides-link {
+  left: 0px; }
+
+#twitter-link {
+  right: 0px; }
 
 div.syntax {
   margin: 10px 20px;
@@ -55,7 +61,7 @@ span.statement {
   overflow: auto;
   max-height: 80%;
   word-wrap: normal;
-  font-size: 1.2rem;
+  font-size: 1.6rem;
   line-height: 1.1; }
 
 .reveal pre.stretch code {
@@ -80,7 +86,7 @@ body {
 
 .reveal {
   font-family: "Open Sans", sans-serif;
-  font-size: 28px;
+  font-size: 40px;
   font-weight: normal;
   letter-spacing: -0.02em;
   color: #eeeeee; }

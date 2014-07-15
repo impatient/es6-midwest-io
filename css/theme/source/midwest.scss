@@ -24,7 +24,7 @@
 }
 
 $mainFont: 'Open Sans', sans-serif;
-$mainFontSize: 28px;
+$mainFontSize: 40px;
 $mainColor: #eee;
 
 $headingFont: 'Cabin Sketch', 'cursive';
@@ -38,16 +38,26 @@ $headingFont: 'Cabin Sketch', 'cursive';
 }
 
 .reveal p.spaced { margin-top:20px;}
-#slides-link {
+#slides-link,#twitter-link {
   position:fixed;
   bottom:0px;
-  left:0px;
   margin:5px;
   z-index:1;
+  font-size:24px;
   background-color: rgba(0,0,0,.7);
   a { color: white;}
 
 }
+
+#slides-link {
+  left:0px;
+}
+
+#twitter-link {
+  right:0px;
+}
+
+
 div.syntax {
   margin:10px 20px;
   text-align:left;
@@ -72,7 +82,7 @@ span.statement {
   overflow: auto;
   max-height: 80%;
   word-wrap: normal;
-  font-size:1.2rem;
+  font-size:1.6rem;
   line-height:1.1;
 }
 .reveal pre.stretch code {
