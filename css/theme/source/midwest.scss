@@ -24,7 +24,7 @@
 }
 
 $mainFont: 'Open Sans', sans-serif;
-$mainFontSize: 40px;
+$mainFontSize: 28px;
 $mainColor: #eee;
 
 $headingFont: 'Cabin Sketch', 'cursive';
@@ -82,8 +82,8 @@ span.statement {
   overflow: auto;
   max-height: 80%;
   word-wrap: normal;
-  font-size:1.6rem;
-  line-height:1.1;
+  font-size:1.1rem;
+  line-height:1;
 }
 .reveal pre.stretch code {
   height: 100%;

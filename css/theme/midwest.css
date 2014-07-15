@@ -61,8 +61,8 @@ span.statement {
   overflow: auto;
   max-height: 80%;
   word-wrap: normal;
-  font-size: 1.6rem;
-  line-height: 1.1; }
+  font-size: 1.1rem;
+  line-height: 1; }
 
 .reveal pre.stretch code {
   height: 100%;
@@ -86,7 +86,7 @@ body {
 
 .reveal {
   font-family: "Open Sans", sans-serif;
-  font-size: 40px;
+  font-size: 28px;
   font-weight: normal;
   letter-spacing: -0.02em;
   color: #eeeeee; }

@@ -8,15 +8,15 @@ class ParseFocusable {
     
   } 
   *focii(domElement, ignoreSelf) {
-	  var isHidden = isHidden(domElement);
-  	if(!ignoreSelf && this.isFocusable(domElement) && !isHidden) {
+    var isHidden = isHidden(domElement);
+    if(!ignoreSelf && this.isFocusable(domElement) && !isHidden) {
       yield domElement
     }    
     if(!isHidden) {//if not hidden traverse
-    	yield *this.focii(domElement.firstElementChild)
+      yield *this.focii(domElement.firstElementChild)
     }    
     if(!ignoreSelf){//if not initial object, get siblings
-     yield *this.focii(domElement.nextElementSibling);
+      yield *this.focii(domElement.nextElementSibling);
     }
   }
   focusArray() {
